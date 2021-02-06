@@ -1,0 +1,17 @@
+rnd=007
+grp=az204-ngevtgrid-$rnd
+loc=westeurope
+appPlan=ngevtgrid-$rnd
+app=food-api-$rnd
+
+# create a resource group
+az group create -n $grp -l $loc
+
+# create an App Service plan
+az appservice plan create -n $appPlan -g $grp --sku FREE
+
+# create a Web App
+az webapp create -n $app -g $grp --plan $appPlan --runtime "DOTNET|5.0"
+
+# print out the FQDN for the Web App
+echo "Web Url: http://$app.azurewebsites.net"

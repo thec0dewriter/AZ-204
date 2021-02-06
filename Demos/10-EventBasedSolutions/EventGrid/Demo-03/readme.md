@@ -1,7 +1,8 @@
 # Real-time EventGrid viewer with serverless SignalR
 
-- Exec `create-evt-hub.azcli`
+- Exec `create-evt-grid.azcli`
 - Exec `create-func-app.azcli`
+- Exec `create-evt-subs.azcli`
 - Exec `create-api.azcli`
 - Exec `create-ngui.azcli`
 

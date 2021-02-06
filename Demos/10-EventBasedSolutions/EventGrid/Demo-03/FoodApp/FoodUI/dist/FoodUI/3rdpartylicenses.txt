@@ -116,6 +116,9 @@ MIT
 @angular/router
 MIT
 
+@aspnet/signalr
+Apache-2.0
+
 @microsoft/applicationinsights-analytics-js
 MIT
     MIT License

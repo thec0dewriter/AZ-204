@@ -1,0 +1,6 @@
+az eventgrid event-subscription create \ 
+   --source-resource-id /subscriptions/<your subscription id>/resourceGroups/event-grid-viewer-serverless/providers/Microsoft.EventGrid/topics/topic \
+   --name serverless-signalr-function \
+   --endpoint <your public Azure Function url>/api/CloudEventSubscription \ 
+   --endpoint-type webhook \
+   --event-delivery-schema cloudeventschemav1_0

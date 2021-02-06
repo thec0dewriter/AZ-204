@@ -11,14 +11,14 @@ COPY --from=build /app .
 ENTRYPOINT ["dotnet", "FoodApi.dll"]
 
 # Build Image
-# docker build --rm -f "Dockerfile" -t foodservice .
+# docker build --rm -f "Dockerfile" -t food-api .
 
 # Run Image
-# docker run -it --rm -p 5051:80 foodservice
+# docker run -it --rm -p 5051:80 food-api
 
 # Browse using: 
 # http://localhost:5051/api/food
 
 # Publish Image to dockerhub
-# docker tag foodservice arambazamba/foodservice
-# docker push arambazamba/foodservice
+# docker tag food-api arambazamba/food-api
+# docker push arambazamba/food-api

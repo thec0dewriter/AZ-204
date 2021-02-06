@@ -2,6 +2,6 @@ export const environment = {
   production: true,
   apiurl: "https://food-api-007.azurewebsites.net/api/",
   appInsights: {
-    instrumentationKey: "a0011e48-9096-4482-8c7a-b3c8fbeb8527",
+    instrumentationKey: "fc9ae057-d6aa-467c-b555-1bf55acc14a1",
   },
 };

@@ -1,5 +1,10 @@
 # Real-time EventGrid viewer with serverless SignalR
 
+- Exec `create-evt-hub.azcli`
+- Exec `create-func-app.azcli`
+- Exec `create-api.azcli`
+- Exec `create-ngui.azcli`
+
 A simple real-time EventGrid viewer for CloudEventSchema v1.0. Back-end developed using serverless SignalR with Azure Function. Front-end developed using Angular 9.
 
 Detailed information can be found in this blog post:

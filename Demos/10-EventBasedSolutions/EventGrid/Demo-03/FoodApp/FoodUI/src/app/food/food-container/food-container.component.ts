@@ -1,12 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { FoodItem } from "../food.model";
-import { FoodState } from "../store/reducers/food.reducer";
-import { Store } from "@ngrx/store";
-import { LoadFood, SelectFood } from "../store/actions/food.actions";
-import { Observable } from "rxjs";
-import { tap } from "rxjs/operators";
-import { getAllFood, getSelected } from "../store/selectors/food.selectors";
-import { AppInsightsService } from "src/app/shared/app-insights/app-insights.service";
+import { Component, OnInit, ɵɵtrustConstantResourceUrl } from "@angular/core";
+import * as SignalR from "@aspnet/signalr";
+import { environment } from "src/environments/environment";
 import { FoodFacade } from "../store/facades/food.service";
 
 @Component({
@@ -15,10 +9,27 @@ import { FoodFacade } from "../store/facades/food.service";
   styleUrls: ["./food-container.component.scss"],
 })
 export class FoodContainerComponent implements OnInit {
-  constructor(public ff: FoodFacade) {}
-
   food$ = this.ff.getFood();
   selected$ = this.ff.getSelected();
+
+  // events: string[] = [];
+  hubConnection: SignalR.HubConnection;
+
+  constructor(public ff: FoodFacade) {
+    // Create connection
+    this.hubConnection = new SignalR.HubConnectionBuilder()
+      .withUrl(`${environment.signalrurl}/api`)
+      .build();
+
+    // Start connection. This will call negotiate endpoint
+    this.hubConnection.start();
+
+    // Handle incoming events for the specific target
+    this.hubConnection.on("newEvent", (event) => {
+      console.log("SignalR - initFood", event);
+      this.ff.initFood();
+    });
+  }
 
   ngOnInit() {
     this.ff.initFood();

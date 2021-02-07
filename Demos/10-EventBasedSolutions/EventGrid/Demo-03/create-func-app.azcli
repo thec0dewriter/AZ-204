@@ -1,11 +1,13 @@
 rnd=007
 grp=az204-ngevtgrid-$rnd
 loc=westeurope
-storage=ngevtgridfuncapp$rnd
-app=ngevtgrid-$rnd
+storage=foodhub$rnd
+app=foodhub-$rnd
 
 az group create -n $grp -l $loc
 
 az storage account  create -n $storage -g $grp 
 
 az functionapp create -n $app -g $grp --storage-account $storage --consumption-plan-location $loc --runtime dotnet --functions-version 3 --app-insights ngevtgrid-$rnd
+
+az functionapp show -n $app -g $grp --query "invokeUrlTemplate" --output tsv

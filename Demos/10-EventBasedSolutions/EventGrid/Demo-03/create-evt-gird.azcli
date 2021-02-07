@@ -1,7 +1,7 @@
 rnd=007
 grp=az204-ngevtgrid-$rnd
 loc=westeurope
-app=ngevtgrid-$rnd
+app=foodapp-$rnd
 
 az signalr create  -g $grp -n $app --sku Free_F1 --service-mode Serverless -l $loc 
 

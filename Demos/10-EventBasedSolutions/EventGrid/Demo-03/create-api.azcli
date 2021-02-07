@@ -1,7 +1,7 @@
 rnd=007
 grp=az204-ngevtgrid-$rnd
 loc=westeurope
-appPlan=ngevtgrid-$rnd
+appPlan=foodapi-plan-$rnd
 app=food-api-$rnd
 
 # create a resource group

@@ -6,6 +6,10 @@
 - Exec `create-api.azcli` to create the App Service hosting the Appi
 - Exec `create-ngui.azcli` to deploy the Angular UI to a Storage Account
 
+---
+
+## Original Post
+
 A simple real-time EventGrid viewer for CloudEventSchema v1.0. Back-end developed using serverless SignalR with Azure Function. Front-end developed using Angular 9.
 
 Detailed information can be found in this blog post:

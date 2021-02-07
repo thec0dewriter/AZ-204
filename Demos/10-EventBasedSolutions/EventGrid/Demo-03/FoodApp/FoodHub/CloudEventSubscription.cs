@@ -38,17 +38,22 @@ namespace CloudFunction
             // (see: https://docs.microsoft.com/en-us/azure/event-grid/cloudevents-schema#use-with-azure-functions)
             if (HttpMethods.IsOptions(req.Method))
             {
-                if(req.Headers.TryGetValue("Webhook-Request-Origin", out var headerValues))
-                {
-                    var originValue = headerValues.FirstOrDefault();
-                    if(!string.IsNullOrEmpty(originValue))
-                    {
-                        req.HttpContext.Response.Headers.Add("Webhook-Allowed-Origin", originValue);
-                        return new OkResult();
-                    }
+                    // var response = req.CreateResponse(HttpStatusCode.OK);
+                    req.HttpContext.Response.Headers.Add("Webhook-Allowed-Origin", "eventgrid.azure.net");
 
-                    return new BadRequestObjectResult("Missing 'Webhook-Request-Origin' header when validating");
-                }
+                    return new OkResult();;
+
+                // if(req.Headers.TryGetValue("Webhook-Request-Origin", out var headerValues))
+                // {
+                //     var originValue = headerValues.FirstOrDefault();
+                //     if(!string.IsNullOrEmpty(originValue))
+                //     {
+                //         req.HttpContext.Response.Headers.Add("Webhook-Allowed-Origin", originValue);
+                //         return new OkResult();
+                //     }
+
+                //     return new BadRequestObjectResult("Missing 'Webhook-Request-Origin' header when validating");
+                // }
             }
             
             // Handle an event received from EventGrid. It reads the event from the request payload and send 

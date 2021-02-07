@@ -1,17 +1,27 @@
-# az eventgrid event-subscription create \ 
-#    --source-resource-id /subscriptions/<your subscription id>/resourceGroups/<ressource-group>/providers/Microsoft.EventGrid/topics/topic \
-#    --name serverless-signalr-function \
-#    --endpoint <your public Azure Function url>/api/CloudEventSubscription \ 
-#    --endpoint-type webhook \
-#    --event-delivery-schema cloudeventschemav1_0
-
 rnd=007
 grp=az204-ngevtgrid-$rnd
+subs="78033352-805c-4acd-af80-f8f95083268d"
 name=foodhub-$rnd
-functionapp=https://foodhub-007.azurewebsites.net
+topic=foodtopic-$rnd
+functionappurl="https://3446d96b76e1.ngrok.io"
+headers="{\"Content-Type\": \"application/cloudevents+json; charset=utf-8\", \"aeg-sas-key\": \"AGDyRIaT1jcclyXvhzkQ6hH+wHqctSGUBYvxAL+cCDY=\"}"
 
 
 az eventgrid event-subscription create --source-resource-id /subscriptions/78033352-805c-4acd-af80-f8f95083268d/resourceGroups/az204-ngevtgrid-007/providers/Microsoft.EventGrid/topics/foodtopic-007 -n $name --endpoint https://foodhub-007.azurewebsites.net/api/CloudEventSubscription?code=axdRL0DFvgIl5a8saA7rgPfjeKBeNmNJFvSYAXsjn602sZCSEfuxZg== --endpoint-type webhook --event-delivery-schema cloudeventschemav1_0
 
    
-az eventgrid event-subscription create --source-resource-id /subscriptions/78033352-805c-4acd-af80-f8f95083268d/resourceGroups/az204-ngevtgrid-007/providers/Microsoft.EventGrid/topics/foodtopic-007 -n $name --endpoint https://3446d96b76e1.ngrok.io/api/CloudEventSubscription?code=axdRL0DFvgIl5a8saA7rgPfjeKBeNmNJFvSYAXsjn602sZCSEfuxZg== --endpoint-type webhook --event-delivery-schema cloudeventschemav1_0   
+az eventgrid event-subscription create --source-resource-id "/subscriptions/$subs/resourceGroups/$grp/providers/Microsoft.EventGrid/topics/$topic" -n $name --endpoint $functionappurl/api/CloudEventSubscription --endpoint-type webhook --event-delivery-schema cloudeventschemav1_0   
+
+# Get the topic url
+url=$(az eventgrid topic show -n $topic -g $grp --query "endpoint" --output tsv)
+echo "Url: " $url
+
+# Get the topic key
+key=$(az eventgrid topic key list -n $topic -g $grp --query "key1" --output tsv)
+echo "Key: " $key
+
+# Send a sample request
+curl --request POST \
+   --header "Content-Type: application/cloudevents+json; charset=utf-8" \
+   --header "aeg-sas-key: $key" \
+   --data @data.json $url

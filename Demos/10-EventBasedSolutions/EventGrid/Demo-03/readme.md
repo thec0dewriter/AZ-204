@@ -1,8 +1,9 @@
 # Real-time EventGrid viewer with serverless SignalR
 
 - Exec `create-evt-grid.azcli` to create EventGrid, SignalR and Application Insights
-- Exec `create-func-app.azcli` to create the Function App
-- Exec `subscribe-topic.azcli` to subscribe to topic
+- Exec `create-func-app.azcli` to create the Function App. Write down the function app Url
+- Deploy FoodHub to Function App
+- Exec `subscribe-topic.azcli` to subscribe to topic. Use the function app Url
 - Exec `create-api.azcli` to create the App Service hosting the Appi
 - Exec `create-ngui.azcli` to deploy the Angular UI to a Storage Account
 

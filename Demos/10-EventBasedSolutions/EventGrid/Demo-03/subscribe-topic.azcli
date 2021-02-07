@@ -1,15 +1,17 @@
 # az eventgrid event-subscription create \ 
-#    --source-resource-id /subscriptions/<your subscription id>/resourceGroups/event-grid-viewer-serverless/providers/Microsoft.EventGrid/topics/topic \
+#    --source-resource-id /subscriptions/<your subscription id>/resourceGroups/<ressource-group>/providers/Microsoft.EventGrid/topics/topic \
 #    --name serverless-signalr-function \
 #    --endpoint <your public Azure Function url>/api/CloudEventSubscription \ 
 #    --endpoint-type webhook \
 #    --event-delivery-schema cloudeventschemav1_0
 
-az eventgrid event-subscription create \ 
-   --source-resource-id /subscriptions/78033352-805c-4acd-af80-f8f95083268d/resourceGroups/event-grid-viewer-serverless/providers/Microsoft.EventGrid/topics/topic \
-   --name serverless-signalr-function \
-   --endpoint <your public Azure Function url>/api/CloudEventSubscription \ 
-   --endpoint-type webhook \
-   --event-delivery-schema cloudeventschemav1_0
+rnd=007
+grp=az204-ngevtgrid-$rnd
+name=foodhub-$rnd
+functionapp=https://foodhub-007.azurewebsites.net
+
+
+az eventgrid event-subscription create --source-resource-id /subscriptions/78033352-805c-4acd-af80-f8f95083268d/resourceGroups/az204-ngevtgrid-007/providers/Microsoft.EventGrid/topics/foodtopic-007 -n $name --endpoint https://foodhub-007.azurewebsites.net/api/CloudEventSubscription?code=axdRL0DFvgIl5a8saA7rgPfjeKBeNmNJFvSYAXsjn602sZCSEfuxZg== --endpoint-type webhook --event-delivery-schema cloudeventschemav1_0
 
    
+az eventgrid event-subscription create --source-resource-id /subscriptions/78033352-805c-4acd-af80-f8f95083268d/resourceGroups/az204-ngevtgrid-007/providers/Microsoft.EventGrid/topics/foodtopic-007 -n $name --endpoint https://3446d96b76e1.ngrok.io/api/CloudEventSubscription?code=axdRL0DFvgIl5a8saA7rgPfjeKBeNmNJFvSYAXsjn602sZCSEfuxZg== --endpoint-type webhook --event-delivery-schema cloudeventschemav1_0   

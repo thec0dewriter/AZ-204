@@ -5,6 +5,6 @@ app=foodapp-$rnd
 
 az signalr create  -g $grp -n $app --sku Free_F1 --service-mode Serverless -l $loc 
 
-az eventgrid topic create -g $grp --name  $app -l $loc --input-schema cloudeventschemav1_0
+az eventgrid topic create -g $grp -n foodtopic-$rnd -l $loc --input-schema cloudeventschemav1_0
 
 az monitor app-insights component create --app $app --location $loc --kind web -g $grp --application-type web --retention-time 30

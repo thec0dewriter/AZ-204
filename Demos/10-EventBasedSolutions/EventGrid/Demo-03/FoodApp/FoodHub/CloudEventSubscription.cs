@@ -28,7 +28,7 @@ namespace CloudFunction
         // (see CloudEvents Specification: https://github.com/cloudevents/spec)
         [FunctionName("CloudEventSubscription")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "options", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "options", "post", Route = null)] HttpRequest req,
             [SignalR(HubName = "cloudEventSchemaHub")] IAsyncCollector<SignalRMessage> signalRMessages,
             ILogger log)
         {

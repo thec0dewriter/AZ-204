@@ -10,4 +10,6 @@ az storage account  create -n $storage -g $grp
 
 az functionapp create -n $app -g $grp --storage-account $storage --consumption-plan-location $loc --runtime dotnet --functions-version 3 --app-insights ngevtgrid-$rnd
 
-az functionapp show -n $app -g $grp --query "invokeUrlTemplate" --output tsv
+url=$(az functionapp show -n $app -g $grp --query "hostNames" --output tsv)
+
+echo "Function App Url: https://"$url
